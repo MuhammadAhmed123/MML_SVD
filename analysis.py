@@ -13,10 +13,11 @@ import matplotlib.pyplot as plt
 
 matrices = []
 
-max_size_matrix = 100
-no_matrices = 10
+base_size_matrix = 5000
+max_size_matrix = 10001
+step_size = 250
 
-for i in range(max_size_matrix-no_matrices,max_size_matrix):
+for i in range(base_size_matrix,max_size_matrix,step_size):
     random_matrix = np.random.rand(i, i)
     matrices.append(random_matrix)
 
@@ -43,12 +44,12 @@ for m in matrices:
 
     sp_time.append(t4-t3)
 
-    # svd
-    t5 = time.time()
-    svd_svd = svd.svd(m)
-    t6 = time.time()
+    # # svd
+    # t5 = time.time()
+    # svd_svd = svd.svd(m)
+    # t6 = time.time()
 
-    svd_time.append(t6-t5)
+    # svd_time.append(t6-t5)
 
     # rsvd_n
     t7 = time.time()
@@ -64,7 +65,7 @@ for m in matrices:
 
     rsvd_s_time.append(t10-t9)
 
-x = [i for i in range(max_size_matrix-no_matrices,max_size_matrix)]
+x = [i for i in range(base_size_matrix,max_size_matrix,step_size)]
 
 # plt.plot(x, np_time, 'r', x, sp_time, 'b', x, svd_time, 'g', x, rsvd_n_time, 'y', rsvd_s_time, 'p')
 # plt.show()
@@ -72,7 +73,7 @@ x = [i for i in range(max_size_matrix-no_matrices,max_size_matrix)]
 
 plt.plot(x, np_time, label='numpy')
 plt.plot(x, sp_time, label='scipy')
-plt.plot(x, svd_time, label='pure_svd')
+# plt.plot(x, svd_time, label='pure_svd')
 plt.plot(x, rsvd_n_time, label='rsvd_numpy')
 plt.plot(x, rsvd_s_time, label='rsvd_scipy')
 plt.xlabel('Matrix Dimensions label')
